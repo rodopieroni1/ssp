@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ExperienciaprofesionalCreateDlg" widgetVar="ExperienciaprofesionalCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateExperienciaprofesionalTitle}">
+            <h:form id="ExperienciaprofesionalCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{experienciaprofesionalController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateExperienciaprofesionalLabel_idExpProf}" for="idExpProf" />
+                        <p:inputText id="idExpProf" value="#{experienciaprofesionalController.selected.idExpProf}" title="#{bundle.CreateExperienciaprofesionalTitle_idExpProf}" required="true" requiredMessage="#{bundle.CreateExperienciaprofesionalRequiredMessage_idExpProf}"/>
+                        <p:outputLabel value="#{bundle.CreateExperienciaprofesionalLabel_lugar}" for="lugar" />
+                        <p:inputText id="lugar" value="#{experienciaprofesionalController.selected.lugar}" title="#{bundle.CreateExperienciaprofesionalTitle_lugar}" required="true" requiredMessage="#{bundle.CreateExperienciaprofesionalRequiredMessage_lugar}"/>
+                        <p:outputLabel value="#{bundle.CreateExperienciaprofesionalLabel_descripcionPuesto}" for="descripcionPuesto" />
+                        <p:inputText id="descripcionPuesto" value="#{experienciaprofesionalController.selected.descripcionPuesto}" title="#{bundle.CreateExperienciaprofesionalTitle_descripcionPuesto}" required="true" requiredMessage="#{bundle.CreateExperienciaprofesionalRequiredMessage_descripcionPuesto}"/>
+                        <p:outputLabel value="#{bundle.CreateExperienciaprofesionalLabel_descripcionFunciones}" for="descripcionFunciones" />
+                        <p:inputText id="descripcionFunciones" value="#{experienciaprofesionalController.selected.descripcionFunciones}" title="#{bundle.CreateExperienciaprofesionalTitle_descripcionFunciones}" required="true" requiredMessage="#{bundle.CreateExperienciaprofesionalRequiredMessage_descripcionFunciones}"/>
+                        <p:outputLabel value="#{bundle.CreateExperienciaprofesionalLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{experienciaprofesionalController.selected.fechaInicio}" title="#{bundle.EditExperienciaprofesionalTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditExperienciaprofesionalRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateExperienciaprofesionalLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{experienciaprofesionalController.selected.fechaFin}" title="#{bundle.EditExperienciaprofesionalTitle_fechaFin}" required="true" requiredMessage="#{bundle.EditExperienciaprofesionalRequiredMessage_fechaFin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateExperienciaprofesionalLabel_trabajaAhi}" for="trabajaAhi" />
+                        <p:inputText id="trabajaAhi" value="#{experienciaprofesionalController.selected.trabajaAhi}" title="#{bundle.CreateExperienciaprofesionalTitle_trabajaAhi}" required="true" requiredMessage="#{bundle.CreateExperienciaprofesionalRequiredMessage_trabajaAhi}"/>
+                        <p:outputLabel value="#{bundle.CreateExperienciaprofesionalLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu id="idPersona" value="#{experienciaprofesionalController.selected.idPersona}" required="true" requiredMessage="#{bundle.EditExperienciaprofesionalRequiredMessage_idPersona}">
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{experienciaprofesionalController.create}" value="#{bundle.Save}" update="display,:ExperienciaprofesionalListForm:datalist,:growl" oncomplete="handleSubmit(args,'ExperienciaprofesionalCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ExperienciaprofesionalCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

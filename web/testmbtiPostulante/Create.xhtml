@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TestmbtiPostulanteCreateDlg" widgetVar="TestmbtiPostulanteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTestmbtiPostulanteTitle}">
+            <h:form id="TestmbtiPostulanteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{testmbtiPostulanteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTestmbtiPostulanteLabel_idTP}" for="idTP" />
+                        <p:inputText id="idTP" value="#{testmbtiPostulanteController.selected.idTP}" title="#{bundle.CreateTestmbtiPostulanteTitle_idTP}" required="true" requiredMessage="#{bundle.CreateTestmbtiPostulanteRequiredMessage_idTP}"/>
+                        <p:outputLabel value="#{bundle.CreateTestmbtiPostulanteLabel_puntajeObtenido}" for="puntajeObtenido" />
+                        <p:inputText id="puntajeObtenido" value="#{testmbtiPostulanteController.selected.puntajeObtenido}" title="#{bundle.CreateTestmbtiPostulanteTitle_puntajeObtenido}" required="true" requiredMessage="#{bundle.CreateTestmbtiPostulanteRequiredMessage_puntajeObtenido}"/>
+                        <p:outputLabel value="#{bundle.CreateTestmbtiPostulanteLabel_idConvocPost}" for="idConvocPost" />
+                        <p:selectOneMenu id="idConvocPost" value="#{testmbtiPostulanteController.selected.idConvocPost}" required="true" requiredMessage="#{bundle.EditTestmbtiPostulanteRequiredMessage_idConvocPost}">
+                            <f:selectItems value="#{convocatoriaPostulanteController.itemsAvailableSelectOne}"
+                                           var="idConvocPostItem"
+                                           itemValue="#{idConvocPostItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTestmbtiPostulanteLabel_idMbti}" for="idMbti" />
+                        <p:selectOneMenu id="idMbti" value="#{testmbtiPostulanteController.selected.idMbti}" required="true" requiredMessage="#{bundle.EditTestmbtiPostulanteRequiredMessage_idMbti}">
+                            <f:selectItems value="#{mbtiController.itemsAvailableSelectOne}"
+                                           var="idMbtiItem"
+                                           itemValue="#{idMbtiItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{testmbtiPostulanteController.create}" value="#{bundle.Save}" update="display,:TestmbtiPostulanteListForm:datalist,:growl" oncomplete="handleSubmit(args,'TestmbtiPostulanteCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TestmbtiPostulanteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

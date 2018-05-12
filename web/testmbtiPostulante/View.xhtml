@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TestmbtiPostulanteViewDlg" widgetVar="TestmbtiPostulanteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTestmbtiPostulanteTitle}">
+            <h:form id="TestmbtiPostulanteViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{testmbtiPostulanteController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTestmbtiPostulanteLabel_idTP}"/>
+                        <h:outputText value="#{testmbtiPostulanteController.selected.idTP}" title="#{bundle.ViewTestmbtiPostulanteTitle_idTP}"/>
+                        <h:outputText value="#{bundle.ViewTestmbtiPostulanteLabel_puntajeObtenido}"/>
+                        <h:outputText value="#{testmbtiPostulanteController.selected.puntajeObtenido}" title="#{bundle.ViewTestmbtiPostulanteTitle_puntajeObtenido}"/>
+                        <h:outputText value="#{bundle.ViewTestmbtiPostulanteLabel_idConvocPost}"/>
+                        <h:outputText value="#{testmbtiPostulanteController.selected.idConvocPost}" title="#{bundle.ViewTestmbtiPostulanteTitle_idConvocPost}"/>
+                        <h:outputText value="#{bundle.ViewTestmbtiPostulanteLabel_idMbti}"/>
+                        <h:outputText value="#{testmbtiPostulanteController.selected.idMbti}" title="#{bundle.ViewTestmbtiPostulanteTitle_idMbti}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TestmbtiPostulanteViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

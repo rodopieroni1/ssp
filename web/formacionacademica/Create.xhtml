@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FormacionacademicaCreateDlg" widgetVar="FormacionacademicaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFormacionacademicaTitle}">
+            <h:form id="FormacionacademicaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formacionacademicaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFormacionacademicaLabel_idForm}" for="idForm" />
+                        <p:inputText id="idForm" value="#{formacionacademicaController.selected.idForm}" title="#{bundle.CreateFormacionacademicaTitle_idForm}" required="true" requiredMessage="#{bundle.CreateFormacionacademicaRequiredMessage_idForm}"/>
+                        <p:outputLabel value="#{bundle.CreateFormacionacademicaLabel_institucion}" for="institucion" />
+                        <p:inputText id="institucion" value="#{formacionacademicaController.selected.institucion}" title="#{bundle.CreateFormacionacademicaTitle_institucion}" required="true" requiredMessage="#{bundle.CreateFormacionacademicaRequiredMessage_institucion}"/>
+                        <p:outputLabel value="#{bundle.CreateFormacionacademicaLabel_lugar}" for="lugar" />
+                        <p:inputText id="lugar" value="#{formacionacademicaController.selected.lugar}" title="#{bundle.CreateFormacionacademicaTitle_lugar}" required="true" requiredMessage="#{bundle.CreateFormacionacademicaRequiredMessage_lugar}"/>
+                        <p:outputLabel value="#{bundle.CreateFormacionacademicaLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{formacionacademicaController.selected.fechaInicio}" title="#{bundle.EditFormacionacademicaTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditFormacionacademicaRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFormacionacademicaLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{formacionacademicaController.selected.fechaFin}" title="#{bundle.EditFormacionacademicaTitle_fechaFin}" required="true" requiredMessage="#{bundle.EditFormacionacademicaRequiredMessage_fechaFin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFormacionacademicaLabel_estadoFormacion}" for="estadoFormacion" />
+                        <p:inputText id="estadoFormacion" value="#{formacionacademicaController.selected.estadoFormacion}" title="#{bundle.CreateFormacionacademicaTitle_estadoFormacion}" required="true" requiredMessage="#{bundle.CreateFormacionacademicaRequiredMessage_estadoFormacion}"/>
+                        <p:outputLabel value="#{bundle.CreateFormacionacademicaLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu id="idPersona" value="#{formacionacademicaController.selected.idPersona}" required="true" requiredMessage="#{bundle.EditFormacionacademicaRequiredMessage_idPersona}">
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{formacionacademicaController.create}" value="#{bundle.Save}" update="display,:FormacionacademicaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FormacionacademicaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FormacionacademicaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

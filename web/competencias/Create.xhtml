@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompetenciasCreateDlg" widgetVar="CompetenciasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCompetenciasTitle}">
+            <h:form id="CompetenciasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{competenciasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCompetenciasLabel_idCompetencia}" for="idCompetencia" />
+                        <p:inputText id="idCompetencia" value="#{competenciasController.selected.idCompetencia}" title="#{bundle.CreateCompetenciasTitle_idCompetencia}" required="true" requiredMessage="#{bundle.CreateCompetenciasRequiredMessage_idCompetencia}"/>
+                        <p:outputLabel value="#{bundle.CreateCompetenciasLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{competenciasController.selected.nombre}" title="#{bundle.CreateCompetenciasTitle_nombre}" required="true" requiredMessage="#{bundle.CreateCompetenciasRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateCompetenciasLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{competenciasController.selected.descripcion}" title="#{bundle.CreateCompetenciasTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateCompetenciasRequiredMessage_descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{competenciasController.create}" value="#{bundle.Save}" update="display,:CompetenciasListForm:datalist,:growl" oncomplete="handleSubmit(args,'CompetenciasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CompetenciasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

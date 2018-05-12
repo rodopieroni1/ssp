@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PreguntasMbtiCreateDlg" widgetVar="PreguntasMbtiCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePreguntasMbtiTitle}">
+            <h:form id="PreguntasMbtiCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{preguntasMbtiController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePreguntasMbtiLabel_idPM}" for="idPM" />
+                        <p:inputText id="idPM" value="#{preguntasMbtiController.selected.idPM}" title="#{bundle.CreatePreguntasMbtiTitle_idPM}" required="true" requiredMessage="#{bundle.CreatePreguntasMbtiRequiredMessage_idPM}"/>
+                        <p:outputLabel value="#{bundle.CreatePreguntasMbtiLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{preguntasMbtiController.selected.descripcion}" title="#{bundle.CreatePreguntasMbtiTitle_descripcion}" required="true" requiredMessage="#{bundle.CreatePreguntasMbtiRequiredMessage_descripcion}"/>
+                        <p:outputLabel value="#{bundle.CreatePreguntasMbtiLabel_reaccionEsperada}" for="reaccionEsperada" />
+                        <p:inputText id="reaccionEsperada" value="#{preguntasMbtiController.selected.reaccionEsperada}" title="#{bundle.CreatePreguntasMbtiTitle_reaccionEsperada}" required="true" requiredMessage="#{bundle.CreatePreguntasMbtiRequiredMessage_reaccionEsperada}"/>
+                        <p:outputLabel value="#{bundle.CreatePreguntasMbtiLabel_idCompetencia}" for="idCompetencia" />
+                        <p:inputText id="idCompetencia" value="#{preguntasMbtiController.selected.idCompetencia}" title="#{bundle.CreatePreguntasMbtiTitle_idCompetencia}" required="true" requiredMessage="#{bundle.CreatePreguntasMbtiRequiredMessage_idCompetencia}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{preguntasMbtiController.create}" value="#{bundle.Save}" update="display,:PreguntasMbtiListForm:datalist,:growl" oncomplete="handleSubmit(args,'PreguntasMbtiCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PreguntasMbtiCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

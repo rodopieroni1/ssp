@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PerfilCompetenciaMbtiEditDlg" widgetVar="PerfilCompetenciaMbtiEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPerfilCompetenciaMbtiTitle}">
+            <h:form id="PerfilCompetenciaMbtiEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{perfilCompetenciaMbtiController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPerfilCompetenciaMbtiLabel_idPCM}" for="idPCM" />
+                        <p:inputText id="idPCM" value="#{perfilCompetenciaMbtiController.selected.idPCM}" title="#{bundle.EditPerfilCompetenciaMbtiTitle_idPCM}" required="true" requiredMessage="#{bundle.EditPerfilCompetenciaMbtiRequiredMessage_idPCM}"/>
+                        <p:outputLabel value="#{bundle.EditPerfilCompetenciaMbtiLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{perfilCompetenciaMbtiController.selected.valor}" title="#{bundle.EditPerfilCompetenciaMbtiTitle_valor}" required="true" requiredMessage="#{bundle.EditPerfilCompetenciaMbtiRequiredMessage_valor}"/>
+                        <p:outputLabel value="#{bundle.EditPerfilCompetenciaMbtiLabel_idCompetencia}" for="idCompetencia" />
+                        <p:selectOneMenu id="idCompetencia" value="#{perfilCompetenciaMbtiController.selected.idCompetencia}" required="true" requiredMessage="#{bundle.EditPerfilCompetenciaMbtiRequiredMessage_idCompetencia}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{competenciasController.itemsAvailableSelectOne}"
+                                           var="idCompetenciaItem"
+                                           itemValue="#{idCompetenciaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPerfilCompetenciaMbtiLabel_idMbti}" for="idMbti" />
+                        <p:selectOneMenu id="idMbti" value="#{perfilCompetenciaMbtiController.selected.idMbti}" required="true" requiredMessage="#{bundle.EditPerfilCompetenciaMbtiRequiredMessage_idMbti}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{mbtiController.itemsAvailableSelectOne}"
+                                           var="idMbtiItem"
+                                           itemValue="#{idMbtiItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPerfilCompetenciaMbtiLabel_idPerfil}" for="idPerfil" />
+                        <p:selectOneMenu id="idPerfil" value="#{perfilCompetenciaMbtiController.selected.idPerfil}" required="true" requiredMessage="#{bundle.EditPerfilCompetenciaMbtiRequiredMessage_idPerfil}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{perfilController.itemsAvailableSelectOne}"
+                                           var="idPerfilItem"
+                                           itemValue="#{idPerfilItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{perfilCompetenciaMbtiController.update}" value="#{bundle.Save}" update="display,:PerfilCompetenciaMbtiListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PerfilCompetenciaMbtiEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PerfilCompetenciaMbtiEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

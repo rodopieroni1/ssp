@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PerfilCompetenciaMbtiViewDlg" widgetVar="PerfilCompetenciaMbtiViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPerfilCompetenciaMbtiTitle}">
+            <h:form id="PerfilCompetenciaMbtiViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{perfilCompetenciaMbtiController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPerfilCompetenciaMbtiLabel_idPCM}"/>
+                        <h:outputText value="#{perfilCompetenciaMbtiController.selected.idPCM}" title="#{bundle.ViewPerfilCompetenciaMbtiTitle_idPCM}"/>
+                        <h:outputText value="#{bundle.ViewPerfilCompetenciaMbtiLabel_valor}"/>
+                        <h:outputText value="#{perfilCompetenciaMbtiController.selected.valor}" title="#{bundle.ViewPerfilCompetenciaMbtiTitle_valor}"/>
+                        <h:outputText value="#{bundle.ViewPerfilCompetenciaMbtiLabel_idCompetencia}"/>
+                        <h:outputText value="#{perfilCompetenciaMbtiController.selected.idCompetencia}" title="#{bundle.ViewPerfilCompetenciaMbtiTitle_idCompetencia}"/>
+                        <h:outputText value="#{bundle.ViewPerfilCompetenciaMbtiLabel_idMbti}"/>
+                        <h:outputText value="#{perfilCompetenciaMbtiController.selected.idMbti}" title="#{bundle.ViewPerfilCompetenciaMbtiTitle_idMbti}"/>
+                        <h:outputText value="#{bundle.ViewPerfilCompetenciaMbtiLabel_idPerfil}"/>
+                        <h:outputText value="#{perfilCompetenciaMbtiController.selected.idPerfil}" title="#{bundle.ViewPerfilCompetenciaMbtiTitle_idPerfil}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PerfilCompetenciaMbtiViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

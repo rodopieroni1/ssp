@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListConvocatoriaPostulanteTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ConvocatoriaPostulanteListForm">
+                <p:panel header="#{bundle.ListConvocatoriaPostulanteTitle}">
+                    <p:dataTable id="datalist" value="#{convocatoriaPostulanteController.items}" var="item"
+                                 selectionMode="single" selection="#{convocatoriaPostulanteController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idConvocPost}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConvocatoriaPostulanteTitle_idConvocPost}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idConvocPost}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConvocatoriaPostulanteTitle_puntajeTotalObtenido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.puntajeTotalObtenido}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConvocatoriaPostulanteTitle_fueSeleccionado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fueSeleccionado}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConvocatoriaPostulanteTitle_presentoDocumentacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.presentoDocumentacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConvocatoriaPostulanteTitle_idPersona}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPersona}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConvocatoriaPostulanteTitle_idConvocatoria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idConvocatoria}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{convocatoriaPostulanteController.prepareCreate}" update=":ConvocatoriaPostulanteCreateForm" oncomplete="PF('ConvocatoriaPostulanteCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ConvocatoriaPostulanteViewForm" oncomplete="PF('ConvocatoriaPostulanteViewDialog').show()" disabled="#{empty convocatoriaPostulanteController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ConvocatoriaPostulanteEditForm" oncomplete="PF('ConvocatoriaPostulanteEditDialog').show()" disabled="#{empty convocatoriaPostulanteController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{convocatoriaPostulanteController.destroy}" update=":growl,datalist" disabled="#{empty convocatoriaPostulanteController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

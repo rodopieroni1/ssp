@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IdiomasCreateDlg" widgetVar="IdiomasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateIdiomasTitle}">
+            <h:form id="IdiomasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{idiomasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateIdiomasLabel_idIdiomas}" for="idIdiomas" />
+                        <p:inputText id="idIdiomas" value="#{idiomasController.selected.idIdiomas}" title="#{bundle.CreateIdiomasTitle_idIdiomas}" required="true" requiredMessage="#{bundle.CreateIdiomasRequiredMessage_idIdiomas}"/>
+                        <p:outputLabel value="#{bundle.CreateIdiomasLabel_idioma}" for="idioma" />
+                        <p:inputText id="idioma" value="#{idiomasController.selected.idioma}" title="#{bundle.CreateIdiomasTitle_idioma}" required="true" requiredMessage="#{bundle.CreateIdiomasRequiredMessage_idioma}"/>
+                        <p:outputLabel value="#{bundle.CreateIdiomasLabel_nivelEscritura}" for="nivelEscritura" />
+                        <p:inputText id="nivelEscritura" value="#{idiomasController.selected.nivelEscritura}" title="#{bundle.CreateIdiomasTitle_nivelEscritura}" required="true" requiredMessage="#{bundle.CreateIdiomasRequiredMessage_nivelEscritura}"/>
+                        <p:outputLabel value="#{bundle.CreateIdiomasLabel_nivelLectura}" for="nivelLectura" />
+                        <p:inputText id="nivelLectura" value="#{idiomasController.selected.nivelLectura}" title="#{bundle.CreateIdiomasTitle_nivelLectura}" required="true" requiredMessage="#{bundle.CreateIdiomasRequiredMessage_nivelLectura}"/>
+                        <p:outputLabel value="#{bundle.CreateIdiomasLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu id="idPersona" value="#{idiomasController.selected.idPersona}" required="true" requiredMessage="#{bundle.EditIdiomasRequiredMessage_idPersona}">
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{idiomasController.create}" value="#{bundle.Save}" update="display,:IdiomasListForm:datalist,:growl" oncomplete="handleSubmit(args,'IdiomasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IdiomasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

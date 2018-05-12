@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IdiomasEditDlg" widgetVar="IdiomasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIdiomasTitle}">
+            <h:form id="IdiomasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{idiomasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIdiomasLabel_idIdiomas}" for="idIdiomas" />
+                        <p:inputText id="idIdiomas" value="#{idiomasController.selected.idIdiomas}" title="#{bundle.EditIdiomasTitle_idIdiomas}" required="true" requiredMessage="#{bundle.EditIdiomasRequiredMessage_idIdiomas}"/>
+                        <p:outputLabel value="#{bundle.EditIdiomasLabel_idioma}" for="idioma" />
+                        <p:inputText id="idioma" value="#{idiomasController.selected.idioma}" title="#{bundle.EditIdiomasTitle_idioma}" required="true" requiredMessage="#{bundle.EditIdiomasRequiredMessage_idioma}"/>
+                        <p:outputLabel value="#{bundle.EditIdiomasLabel_nivelEscritura}" for="nivelEscritura" />
+                        <p:inputText id="nivelEscritura" value="#{idiomasController.selected.nivelEscritura}" title="#{bundle.EditIdiomasTitle_nivelEscritura}" required="true" requiredMessage="#{bundle.EditIdiomasRequiredMessage_nivelEscritura}"/>
+                        <p:outputLabel value="#{bundle.EditIdiomasLabel_nivelLectura}" for="nivelLectura" />
+                        <p:inputText id="nivelLectura" value="#{idiomasController.selected.nivelLectura}" title="#{bundle.EditIdiomasTitle_nivelLectura}" required="true" requiredMessage="#{bundle.EditIdiomasRequiredMessage_nivelLectura}"/>
+                        <p:outputLabel value="#{bundle.EditIdiomasLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu id="idPersona" value="#{idiomasController.selected.idPersona}" required="true" requiredMessage="#{bundle.EditIdiomasRequiredMessage_idPersona}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{idiomasController.update}" value="#{bundle.Save}" update="display,:IdiomasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IdiomasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IdiomasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

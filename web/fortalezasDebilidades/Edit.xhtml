@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FortalezasDebilidadesEditDlg" widgetVar="FortalezasDebilidadesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFortalezasDebilidadesTitle}">
+            <h:form id="FortalezasDebilidadesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{fortalezasDebilidadesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFortalezasDebilidadesLabel_idFD}" for="idFD" />
+                        <p:inputText id="idFD" value="#{fortalezasDebilidadesController.selected.idFD}" title="#{bundle.EditFortalezasDebilidadesTitle_idFD}" required="true" requiredMessage="#{bundle.EditFortalezasDebilidadesRequiredMessage_idFD}"/>
+                        <p:outputLabel value="#{bundle.EditFortalezasDebilidadesLabel_tiutlo}" for="tiutlo" />
+                        <p:inputText id="tiutlo" value="#{fortalezasDebilidadesController.selected.tiutlo}" title="#{bundle.EditFortalezasDebilidadesTitle_tiutlo}" required="true" requiredMessage="#{bundle.EditFortalezasDebilidadesRequiredMessage_tiutlo}"/>
+                        <p:outputLabel value="#{bundle.EditFortalezasDebilidadesLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{fortalezasDebilidadesController.selected.descripcion}" title="#{bundle.EditFortalezasDebilidadesTitle_descripcion}" required="true" requiredMessage="#{bundle.EditFortalezasDebilidadesRequiredMessage_descripcion}"/>
+                        <p:outputLabel value="#{bundle.EditFortalezasDebilidadesLabel_esFortaleza}" for="esFortaleza" />
+                        <p:inputText id="esFortaleza" value="#{fortalezasDebilidadesController.selected.esFortaleza}" title="#{bundle.EditFortalezasDebilidadesTitle_esFortaleza}" required="true" requiredMessage="#{bundle.EditFortalezasDebilidadesRequiredMessage_esFortaleza}"/>
+                        <p:outputLabel value="#{bundle.EditFortalezasDebilidadesLabel_idMbti}" for="idMbti" />
+                        <p:selectOneMenu id="idMbti" value="#{fortalezasDebilidadesController.selected.idMbti}" required="true" requiredMessage="#{bundle.EditFortalezasDebilidadesRequiredMessage_idMbti}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{mbtiController.itemsAvailableSelectOne}"
+                                           var="idMbtiItem"
+                                           itemValue="#{idMbtiItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{fortalezasDebilidadesController.update}" value="#{bundle.Save}" update="display,:FortalezasDebilidadesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FortalezasDebilidadesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FortalezasDebilidadesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

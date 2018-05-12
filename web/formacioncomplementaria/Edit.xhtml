@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FormacioncomplementariaEditDlg" widgetVar="FormacioncomplementariaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFormacioncomplementariaTitle}">
+            <h:form id="FormacioncomplementariaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formacioncomplementariaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFormacioncomplementariaLabel_idFormComplementaria}" for="idFormComplementaria" />
+                        <p:inputText id="idFormComplementaria" value="#{formacioncomplementariaController.selected.idFormComplementaria}" title="#{bundle.EditFormacioncomplementariaTitle_idFormComplementaria}" required="true" requiredMessage="#{bundle.EditFormacioncomplementariaRequiredMessage_idFormComplementaria}"/>
+                        <p:outputLabel value="#{bundle.EditFormacioncomplementariaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{formacioncomplementariaController.selected.descripcion}" title="#{bundle.EditFormacioncomplementariaTitle_descripcion}" required="true" requiredMessage="#{bundle.EditFormacioncomplementariaRequiredMessage_descripcion}"/>
+                        <p:outputLabel value="#{bundle.EditFormacioncomplementariaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{formacioncomplementariaController.selected.fecha}" title="#{bundle.EditFormacioncomplementariaTitle_fecha}" required="true" requiredMessage="#{bundle.EditFormacioncomplementariaRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditFormacioncomplementariaLabel_lugar}" for="lugar" />
+                        <p:inputText id="lugar" value="#{formacioncomplementariaController.selected.lugar}" title="#{bundle.EditFormacioncomplementariaTitle_lugar}" required="true" requiredMessage="#{bundle.EditFormacioncomplementariaRequiredMessage_lugar}"/>
+                        <p:outputLabel value="#{bundle.EditFormacioncomplementariaLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu id="idPersona" value="#{formacioncomplementariaController.selected.idPersona}" required="true" requiredMessage="#{bundle.EditFormacioncomplementariaRequiredMessage_idPersona}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{formacioncomplementariaController.update}" value="#{bundle.Save}" update="display,:FormacioncomplementariaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FormacioncomplementariaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FormacioncomplementariaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

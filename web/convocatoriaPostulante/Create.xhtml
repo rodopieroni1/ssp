@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConvocatoriaPostulanteCreateDlg" widgetVar="ConvocatoriaPostulanteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateConvocatoriaPostulanteTitle}">
+            <h:form id="ConvocatoriaPostulanteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{convocatoriaPostulanteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConvocatoriaPostulanteLabel_idConvocPost}" for="idConvocPost" />
+                        <p:inputText id="idConvocPost" value="#{convocatoriaPostulanteController.selected.idConvocPost}" title="#{bundle.CreateConvocatoriaPostulanteTitle_idConvocPost}" required="true" requiredMessage="#{bundle.CreateConvocatoriaPostulanteRequiredMessage_idConvocPost}"/>
+                        <p:outputLabel value="#{bundle.CreateConvocatoriaPostulanteLabel_puntajeTotalObtenido}" for="puntajeTotalObtenido" />
+                        <p:inputText id="puntajeTotalObtenido" value="#{convocatoriaPostulanteController.selected.puntajeTotalObtenido}" title="#{bundle.CreateConvocatoriaPostulanteTitle_puntajeTotalObtenido}" required="true" requiredMessage="#{bundle.CreateConvocatoriaPostulanteRequiredMessage_puntajeTotalObtenido}"/>
+                        <p:outputLabel value="#{bundle.CreateConvocatoriaPostulanteLabel_fueSeleccionado}" for="fueSeleccionado" />
+                        <p:inputText id="fueSeleccionado" value="#{convocatoriaPostulanteController.selected.fueSeleccionado}" title="#{bundle.CreateConvocatoriaPostulanteTitle_fueSeleccionado}" required="true" requiredMessage="#{bundle.CreateConvocatoriaPostulanteRequiredMessage_fueSeleccionado}"/>
+                        <p:outputLabel value="#{bundle.CreateConvocatoriaPostulanteLabel_presentoDocumentacion}" for="presentoDocumentacion" />
+                        <p:inputText id="presentoDocumentacion" value="#{convocatoriaPostulanteController.selected.presentoDocumentacion}" title="#{bundle.CreateConvocatoriaPostulanteTitle_presentoDocumentacion}" required="true" requiredMessage="#{bundle.CreateConvocatoriaPostulanteRequiredMessage_presentoDocumentacion}"/>
+                        <p:outputLabel value="#{bundle.CreateConvocatoriaPostulanteLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu id="idPersona" value="#{convocatoriaPostulanteController.selected.idPersona}" required="true" requiredMessage="#{bundle.EditConvocatoriaPostulanteRequiredMessage_idPersona}">
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateConvocatoriaPostulanteLabel_idConvocatoria}" for="idConvocatoria" />
+                        <p:selectOneMenu id="idConvocatoria" value="#{convocatoriaPostulanteController.selected.idConvocatoria}" required="true" requiredMessage="#{bundle.EditConvocatoriaPostulanteRequiredMessage_idConvocatoria}">
+                            <f:selectItems value="#{convocatoriaController.itemsAvailableSelectOne}"
+                                           var="idConvocatoriaItem"
+                                           itemValue="#{idConvocatoriaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{convocatoriaPostulanteController.create}" value="#{bundle.Save}" update="display,:ConvocatoriaPostulanteListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConvocatoriaPostulanteCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConvocatoriaPostulanteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
